@@ -25,7 +25,6 @@ library(stringr) # String manipulation
 library(ggplot2) # Primary package for data visualization
 library(gganimate) # Creates animated plots (with ggplot2)
 library(ggfortify) # Visualizes model outputs (PCA, clustering)
-library(ggmosaic) # Creates mosaic plots
 library(ggpubr) # Enhances ggplot2 with greater details
 library(ggstance) # Horizontal geoms for ggplot2
 library(plotly) # Create interactive plots
