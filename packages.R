@@ -27,7 +27,6 @@ install.packages("stringr") # String manipulation
 install.packages("ggplot2") # Primary package for data visualization
 install.packages("gganimate") # Creates animated plots (with ggplot2)
 install.packages("ggfortify") # Visualizes model outputs (PCA, clustering)
-install.packages("ggmosaic", repos = c('https://haleyjeppson.r-universe.dev', 'https://cloud.r-project.org'))
 install.packages("ggpubr") # Enhances ggplot2 with greater details
 install.packages("ggstance") # Horizontal geoms for ggplot2
 install.packages("plotly") # Create interactive plots
