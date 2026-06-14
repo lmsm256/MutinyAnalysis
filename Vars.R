@@ -1125,3 +1125,43 @@ base_data <- base_data %>%
 #------------------------------------------------------------------------------------------------#
 #Mutiny
 #------------------------------------------------------------------------------------------------#  
+mutiny <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/MIA3.20260611%20-%20Sheet1.csv")
+mutiny <- mutiny %>%
+  filter(confidence==1) %>%
+  rename(mutiny_date = edate) %>%
+  rename(mutiny_resulted_coup = coup) %>%
+  rename(mutiny = confidence) %>%
+  select(ccode, year, month, mutiny_date, mutiny, mutiny_resulted_coup)
+base_data <- base_data %>%
+  left_join(mutiny, by=c("ccode", "year", "month")) %>%
+  group_by(ccode) %>%
+  mutate(across(c(mutiny_date, mutiny, mutiny_resulted_coup), lag)) %>%
+  ungroup()
+base_data <- base_data %>%
+mutate(mutiny = replace_na(mutiny, 0)) 
+
+#add time since last mutiny
+df <- base_data %>%
+  select(ccode, year, month, mutiny) %>%
+  arrange(ccode, year, month, mutiny) %>%
+  group_by(ccode) %>%
+  mutate(
+    mutiny_row = if_else(mutiny == 1, row_number(), NA_integer_),
+    last_mutiny_row = cummax(replace_na(mutiny_row, 0)),
+    months_since_mutiny = if_else(
+      last_mutiny_row == 0,
+      row_number(),                    # before first mutiny
+      row_number() - last_mutiny_row   # after a mutiny
+    )
+  ) %>%
+  ungroup() %>%
+  mutate(months_since_mutiny2 = months_since_mutiny^2) %>%
+  mutate(months_since_mutiny3 = months_since_mutiny^3) %>%
+  select(-mutiny_row, -last_mutiny_row, -mutiny)
+base_data <- base_data %>%
+  left_join(df, by=c("ccode", "year", "month"))
+
+#duplicates formed somewhere in the code. removing them here for now and will find source of problem later
+base_data <- base_data %>%
+  distinct(country, ccode, year, month, .keep_all = TRUE)
+
