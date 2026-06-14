@@ -1,11 +1,3 @@
-#------------------------------------------------------------------------------------------------#
-#Front-end stuff
-#------------------------------------------------------------------------------------------------#  
-
-rm(list = ls())
-#source("https://raw.githubusercontent.com/lmsm256/MutinyAnalysis/refs/heads/main/packages.R") 
-#source("https://raw.githubusercontent.com/lmsm256/MutinyAnalysis/refs/heads/main/libraries.R") 
-
 #------------------------------------------------------------------------------------------------
 #Baseline data: unit of analysis; ccodes; DVs + autocorrelation needs
 #------------------------------------------------------------------------------------------------ 
