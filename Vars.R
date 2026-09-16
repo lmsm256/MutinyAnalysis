@@ -1,4 +1,6 @@
 rm(list = ls())
+source("https://raw.githubusercontent.com/lmsm256/MutinyAnalysis/refs/heads/main/packages.R") 
+source("https://raw.githubusercontent.com/lmsm256/MutinyAnalysis/refs/heads/main/libraries.R") 
 source("https://raw.githubusercontent.com/lmsm256/MutinyAnalysis/refs/heads/main/building_coup_data.R")
 
 #------------------------------------------------------------------------------------------------#
@@ -462,7 +464,7 @@ ch <- yearly %>%
 rm(ch)
 
 #add trade w/ US only; from https://dataweb.usitc.gov/; couldn't pull these directly from web so putting them on github
-#grabbed updated data on 03/27/26
+#grabbed updated data on 06/14/26
 url <- "https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/updated-DataWeb-Query-Export%20(2).xlsx"
 destfile <- "DataWeb_Query_Export_20_1_.xlsx"
 curl::curl_download(url, destfile)
@@ -1165,3 +1167,8 @@ base_data <- base_data %>%
 base_data <- base_data %>%
   distinct(country, ccode, year, month, .keep_all = TRUE)
 
+
+library(data.table)
+
+# Saves as a highly compressed file automatically based on the .gz extension
+fwrite(base_data, "base_data.csv.gz", row.names = FALSE)
