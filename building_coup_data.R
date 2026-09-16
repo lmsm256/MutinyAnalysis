@@ -2,32 +2,24 @@
 #Baseline data: unit of analysis; ccodes; DVs + autocorrelation needs
 #------------------------------------------------------------------------------------------------ 
 
-# Country codes (Thyne 2022). 
-url <- "https://www.uky.edu/~clthyn2/replace_ccode_country.xls" # Bringing in ccodes to merge. 
-destfile <- "replace_ccode_country.xls"
-curl::curl_download(url, destfile)
-ccodes <- read_excel(destfile)
+url <- "https://www.globalcoups.com/downloads/coups-by-country.csv"
+destfile <- "coups-by-country.csv"
+download.file(url, destfile, mode = "wb")  # mode = "wb" important for binary files (zip, xlsx, etc.)
+coup_data <- read.csv(destfile)
 rm(url, destfile)
 
-#update so we have most recent month: 04/2026
-base_data <- read_csv("https://www.uky.edu/~clthyn2/base_data.csv") # Reading in base data. 
+# Country codes (Thyne 2022).
+ccodes <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/ccodes.csv")
+
+base_data <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/coup_base_data.csv")
 update <- base_data %>%
-  filter(year>=2023) %>%
-  mutate(year=year+2)
+  filter(year==2025) %>%
+  mutate(year=year+1) %>%
+  filter(month>6 & month<11)
 base_data <- base_data %>%
   full_join(update, by=c("ccode", "year", "month", "country")) %>%
-  arrange(ccode, year, month) %>%
-  mutate(cut=ifelse(year==2026 & month>6, 1, 0)) %>%
-  filter(cut!=1) %>%
-  arrange(ccode, year, month) %>%
-  select(-cut)
+  arrange(ccode, year, month) 
 rm(update)
-
-# Coup data (Powell & Thyne 2011). 
-# Reading in data. 
-coup_data <- read_delim("http://www.uky.edu/~clthyn2/coup_data/powell_thyne_coups_final.txt", 
-                        delim = "\t", escape_double = FALSE, 
-                        trim_ws = TRUE) 
 
 # Cleaning up data. 
 check <- coup_data %>%
