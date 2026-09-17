@@ -12,7 +12,7 @@ coup_data$coup_fake <- rbinom(nrow(coup_data), size = 1, prob = 0.03)
 
 
 #"naive model" without mutiny 
-reduced_model <- feglm(coup_fake ~ polity2 + euds, 
+reduced_model <- feglm(coup_fake ~ polity2 + euds, #replace with actual variables
                      data = coup_data, 
                      family = "binomial",
                      cluster = ~ccode)
