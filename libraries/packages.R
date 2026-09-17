@@ -61,6 +61,7 @@ install.packages("flextable") # Format tables for Word/PowerPoint
 install.packages("performance") # Evaluate model performance and diagnostics
 install.packages("DHARMa") # Residual diagnostics for GLMss
 install.packages("lmtest") #Linear regression diagnostics
+install.packages("sandwich") # Robust and clustered standard error calculations
 
 # Data Summarization and Reporting
 install.packages("gt") #used for regression tables
