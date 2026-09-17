@@ -43,6 +43,7 @@ library(fixest) # Fixed effects, clustering, AR(1), fast estimation
 library(lm.beta) # Standardized Regression Coefficients or Beta weights
 library(margins) # Marginal effects from model objects 
 library(caret) # Classification and Regression Training
+library(sandwich) # Robust standard error calculation
 
 
 # Spatial Analysis
