@@ -9,9 +9,9 @@ coup_data <- read.csv(destfile)
 rm(url, destfile)
 
 # Country codes (Thyne 2022).
-ccodes <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/ccodes.csv")
+ccodes <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/CSVs/ccodes.csv")
 
-base_data <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/coup_base_data.csv")
+base_data <- read_csv("https://github.com/lmsm256/MutinyAnalysis/raw/refs/heads/main/CSVs/coup_base_data.csv")
 update <- base_data %>%
   filter(year==2025) %>%
   mutate(year=year+1) %>%
