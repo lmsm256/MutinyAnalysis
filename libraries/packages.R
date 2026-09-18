@@ -71,6 +71,7 @@ install.packages("stargazer") # Creates regression tables
 
 # Data Export and Import
 install.packages("remotes") #install R packages from GitHub or other sources
+install.packages("httr")
 
 # Miscellaneous Utilities
 install.packages("gapminder") # Global development indicators and example data
