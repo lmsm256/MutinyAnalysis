@@ -70,6 +70,7 @@ library(gt) # Used for regression tables
 
 # Data Export and Import
 library(remotes) # Install R packages from GitHub or other sources
+library(httr)
 
 # Miscellaneous Utilities
 library(gapminder) # Global development indicators and example data
